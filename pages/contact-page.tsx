@@ -1,5 +1,10 @@
 import Layout from '../components/Layout';
+import { selectUser } from '../features/user/userSlice';
+import { useAppSelector } from '../hooks/useRTK';
+import { UserType } from '../types/UserType';
 const Contact = () => {
+  const user: UserType = useAppSelector(selectUser);
+  console.log('🚀 ~ file: contact-page.tsx ~ line 7 ~ Contact ~ user', user);
   return (
     <Layout title="contact">
       <div className="bg-white text-center shadow-xl p-8 w-80 rounded">
@@ -7,9 +12,10 @@ const Contact = () => {
           <p className="font-bold">Contact info</p>
         </div>
         <div className="flex justify-center mt-4">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             className="rounded-full"
-            src="/avatar_next.jpg"
+            src={`${user.photoUrl}`}
             width={60}
             height={60}
             alt="Avatar"

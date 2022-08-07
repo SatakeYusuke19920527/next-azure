@@ -5,6 +5,7 @@ const Home: NextPage = () => {
   return (
     <Layout>
       <h1>Hello next.js</h1>
+      <h1>test</h1>
     </Layout>
   );
 };

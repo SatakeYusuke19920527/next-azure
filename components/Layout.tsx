@@ -1,6 +1,12 @@
+/* eslint-disable @next/next/no-img-element */
+import { signIn, signOut, useSession } from 'next-auth/react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { ReactNode } from 'react';
+import { selectUser } from '../features/user/userSlice';
+import { useLoginCheck } from '../hooks/useLoginCheck';
+import { useAppSelector } from '../hooks/useRTK';
+import { UserType } from '../types/UserType';
 
 const Layout = ({
   children,
@@ -9,6 +15,12 @@ const Layout = ({
   children: ReactNode;
   title?: string;
 }) => {
+  const isLogin = useLoginCheck();
+  const user: UserType = useAppSelector(selectUser);
+  const { data } = useSession();
+  console.log('🚀 ~ file: Layout.tsx ~ line 16 ~ data', data);
+  console.log('🚀 ~ file: Layout.tsx ~ line 15 ~ isLogin', isLogin);
+
   return (
     <div className="flex justify-center items-center flex-col min-h-screen text-gray-600 text-sm font-mono">
       <Head>
@@ -41,6 +53,25 @@ const Layout = ({
                 </a>
               </Link>
             </div>
+            <div className="ml-auto pr-4">
+              {data?.user ? (
+                <img
+                  className="rounded-full cursor-pointer"
+                  src={`${user.photoUrl}`}
+                  width={40}
+                  height={40}
+                  onClick={() => signOut()}
+                  alt="Avatar"
+                />
+              ) : (
+                <a
+                  className="text-gray-300 hover:bg-gray-700 px-3 py-2 rounded cursor-pointer"
+                  onClick={() => signIn()}
+                >
+                  Login
+                </a>
+              )}
+            </div>
           </div>
         </nav>
       </header>
@@ -54,7 +85,7 @@ const Layout = ({
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
         </a>
       </footer>
