@@ -18,8 +18,6 @@ const Layout = ({
   const isLogin = useLoginCheck();
   const user: UserType = useAppSelector(selectUser);
   const { data } = useSession();
-  console.log('🚀 ~ file: Layout.tsx ~ line 16 ~ data', data);
-  console.log('🚀 ~ file: Layout.tsx ~ line 15 ~ isLogin', isLogin);
 
   return (
     <div className="flex justify-center items-center flex-col min-h-screen text-gray-600 text-sm font-mono">
