@@ -2,8 +2,11 @@ import type { NextPage } from 'next';
 import Layout from '../components/Layout';
 
 const Home: NextPage = () => {
-  const res = process.env.NEXT_PUBLIC_STRIPE_PRODUCT_URL!;
-  console.log('🚀 ~ file: index.tsx ~ line 6 ~ res', res);
+  // const res = process.env.NEXT_PUBLIC_STRIPE_PRODUCT_URL!;
+  console.log(
+    '🚀 ~ file: index.tsx ~ line 6 ~ 環境変数',
+    process.env['NEXT_PUBLIC_STRIPE_PRODUCT_URL']
+  );
 
   return (
     <Layout>
