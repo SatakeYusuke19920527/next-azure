@@ -30,19 +30,25 @@ const EcPage = ({ products }: { products: ProductType[] }) => {
     setPds(products);
   }, [products]);
 
-  return (
+  return pds.length !== 0 ? (
     <Layout>
       <main className="w-screen box-content p-20 flex flex-wrap justify-center">
-        {products &&
-          products.map((product, index) => {
+        {pds &&
+          pds.map((product, index) => {
             return (
-              <>
-                <ProductCard key={index} product={product} />
-                <ProductCard key={index} product={product} />
-                <ProductCard key={index} product={product} />
-              </>
+              <div key={index}>
+                <ProductCard product={product} />
+                <ProductCard product={product} />
+                <ProductCard product={product} />
+              </div>
             );
           })}
+      </main>
+    </Layout>
+  ) : (
+    <Layout>
+      <main className="w-screen box-content p-20 flex flex-wrap justify-center">
+        <h1>loading...</h1>
       </main>
     </Layout>
   );
