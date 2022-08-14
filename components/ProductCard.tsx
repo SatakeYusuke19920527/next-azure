@@ -1,10 +1,6 @@
 import { ProductType } from '../types/ProductType';
 
 const ProductCard = ({ product }: { product: ProductType }) => {
-  console.log(
-    '🚀 ~ file: ProductCard.tsx ~ line 4 ~ ProductCard ~ product',
-    product
-  );
   return (
     <form
       action={`/api/checkout_sessions?product_key=${product.prices[0].id}`}

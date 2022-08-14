@@ -10,7 +10,7 @@ import { ProductType } from '../types/ProductType';
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 );
-export default function EcPage({ products }: { products: ProductType[] }) {
+const EcPage = ({ products }: { products: ProductType[] }) => {
   const [pds, setPds] = useState<ProductType[]>([]);
   console.log('🚀 ~ file: ec-page.tsx ~ line 15 ~ EcPage ~ pds', pds);
   const user = useAppSelector(selectUser);
@@ -46,9 +46,11 @@ export default function EcPage({ products }: { products: ProductType[] }) {
       </main>
     </Layout>
   );
-}
+};
 
 export async function getStaticProps() {
   const res = await getProducts();
   return res;
 }
+
+export default EcPage;
