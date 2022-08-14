@@ -1,14 +1,20 @@
 import { loadStripe } from '@stripe/stripe-js';
-import React from 'react';
+import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
+import ProductCard from '../components/ProductCard';
+import { selectUser } from '../features/user/userSlice';
+import { useAppSelector } from '../hooks/useRTK';
+import { getProducts } from '../lib/get-products';
+import { ProductType } from '../types/ProductType';
 
-// Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 );
-export default function PreviewPage() {
-  React.useEffect(() => {
+export default function EcPage({ products }: { products: ProductType[] }) {
+  const [pds, setPds] = useState<ProductType[]>([]);
+  console.log('🚀 ~ file: ec-page.tsx ~ line 15 ~ EcPage ~ pds', pds);
+  const user = useAppSelector(selectUser);
+  useEffect(() => {
     // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
     if (query.get('success')) {
@@ -20,44 +26,29 @@ export default function PreviewPage() {
         'Order canceled -- continue to shop around and checkout when you’re ready.'
       );
     }
-  }, []);
+
+    setPds(products);
+  }, [products]);
 
   return (
     <Layout>
-      <form action="/api/checkout_sessions" method="POST">
-        <section>
-          <button type="submit" role="link">
-            Checkout
-          </button>
-        </section>
-        <style jsx>
-          {`
-            section {
-              background: #ffffff;
-              display: flex;
-              flex-direction: column;
-              width: 400px;
-              height: 112px;
-              border-radius: 6px;
-              justify-content: space-between;
-            }
-            button {
-              height: 36px;
-              background: #556cd6;
-              border-radius: 4px;
-              color: white;
-              border: 0;
-              font-weight: 600;
-              cursor: pointer;
-              transition: all 0.2s ease;
-              box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
-            }
-            button:hover {
-              opacity: 0.8;
-            }
-          `}
-        </style>
-      </form>
+      <main className="w-screen box-content p-20 flex flex-wrap justify-center">
+        {products &&
+          products.map((product, index) => {
+            return (
+              <>
+                <ProductCard key={index} product={product} />
+                <ProductCard key={index} product={product} />
+                <ProductCard key={index} product={product} />
+              </>
+            );
+          })}
+      </main>
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  const res = await getProducts();
+  return res;
 }
