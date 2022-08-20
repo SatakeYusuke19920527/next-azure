@@ -30,3 +30,23 @@ export async function getPostData(id: string) {
     post
   }
 }
+
+export async function fetchCosmosData() {
+  console.log('🚀 ~ file: crud-page.tsx ~ line 6 ~ connectCosmos ~ res1 test'); 
+  try {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await fetch('/api/connect_cosmos');
+      console.log('🚀 ~ file: crud-page.tsx ~ line 6 ~ connectCosmos ~ res', res); 
+      resolve(res)
+    } catch (error) {
+      console.log("🚀 ~ file: load-post.ts ~ line 41 ~ returnnewPromise ~ error", error)
+      reject(error)
+    }
+  })  
+  } catch (error) {
+  console.log("🚀 ~ file: load-post.ts ~ line 48 ~ fetchCosmosData ~ error", error)
+    
+  }
+  
+}

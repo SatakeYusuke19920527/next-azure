@@ -45,6 +45,11 @@ const Layout = ({
                   EC
                 </a>
               </Link>
+              <Link href="/crud-page">
+                <a className="text-gray-300 hover:bg-gray-700 px-3 py-2 rounded">
+                  CRUD
+                </a>
+              </Link>
               <Link href="/contact-page">
                 <a className="text-gray-300 hover:bg-gray-700 px-3 py-2 rounded">
                   Contact

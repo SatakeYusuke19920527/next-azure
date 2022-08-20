@@ -1,6 +1,7 @@
 import { loadStripe } from '@stripe/stripe-js';
 import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
+import ProductCard from '../components/ProductCard';
 import { selectUser } from '../features/user/userSlice';
 import { useAppSelector } from '../hooks/useRTK';
 import { getProducts } from '../lib/get-products';
@@ -32,7 +33,7 @@ const EcPage = ({ products }: { products: ProductType[] }) => {
   return pds.length !== 0 ? (
     <Layout>
       <main className="w-screen box-content p-20 flex flex-wrap justify-center">
-        {/* {pds &&
+        {pds &&
           pds.map((product, index) => {
             return (
               <div key={index}>
@@ -41,7 +42,7 @@ const EcPage = ({ products }: { products: ProductType[] }) => {
                 <ProductCard product={product} />
               </div>
             );
-          })} */}
+          })}
       </main>
     </Layout>
   ) : (

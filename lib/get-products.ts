@@ -1,4 +1,3 @@
-
 /**
  * stripeの商品一覧を取得する
  * @returns products
