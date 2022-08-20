@@ -63,9 +63,4 @@ const EcPage = () => {
   );
 };
 
-// export async function getStaticProps() {
-//   const res = await getProducts();
-//   return res;
-// }
-
 export default EcPage;
