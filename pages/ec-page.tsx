@@ -10,11 +10,13 @@ import { ProductType } from '../types/ProductType';
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 );
-const EcPage = ({ products }: { products: ProductType[] }) => {
+const EcPage = () => {
   const [pds, setPds] = useState<ProductType[]>([]);
   console.log('🚀 ~ file: ec-page.tsx ~ line 15 ~ EcPage ~ pds', pds);
   const user = useAppSelector(selectUser);
+  console.log('🚀 ~ file: ec-page.tsx ~ line 17 ~ EcPage ~ user', user);
   useEffect(() => {
+    getStripeProducts();
     // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
     if (query.get('success')) {
@@ -26,9 +28,16 @@ const EcPage = ({ products }: { products: ProductType[] }) => {
         'Order canceled -- continue to shop around and checkout when you’re ready.'
       );
     }
+  }, []);
 
-    setPds(products);
-  }, [products]);
+  const getStripeProducts = async () => {
+    const res = await getProducts();
+    console.log(
+      '🚀 ~ file: ec-page.tsx ~ line 34 ~ getStripeProducts ~ res',
+      res
+    );
+    setPds(res.props.products);
+  };
 
   return pds.length !== 0 ? (
     <Layout>
@@ -54,9 +63,9 @@ const EcPage = ({ products }: { products: ProductType[] }) => {
   );
 };
 
-export async function getStaticProps() {
-  const res = await getProducts();
-  return res;
-}
+// export async function getStaticProps() {
+//   const res = await getProducts();
+//   return res;
+// }
 
 export default EcPage;
