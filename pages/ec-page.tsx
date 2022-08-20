@@ -47,8 +47,6 @@ const EcPage = () => {
             return (
               <div key={index}>
                 <ProductCard product={product} />
-                <ProductCard product={product} />
-                <ProductCard product={product} />
               </div>
             );
           })}
