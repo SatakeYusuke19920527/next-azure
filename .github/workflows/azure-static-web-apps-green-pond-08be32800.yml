@@ -47,7 +47,6 @@ jobs:
           NEXT_PUBLIC_STRIPE_PRODUCT_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PRODUCT_KEY }}
           GITHUB_ID: ${{secrets.GITHUB_ID}}
           GITHUB_SECRET: ${{secrets.GITHUB_SECRET}}
-        run: echo $NEXT_PUBLIC_STRIPE_PRODUCT_KEY
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
