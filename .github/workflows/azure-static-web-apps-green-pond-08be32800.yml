@@ -46,7 +46,7 @@ jobs:
           NEXT_AUZRE_ENV: ${{ secrets.NEXT_AUZRE_ENV}}
           NEXT_PUBLIC_STRIPE_PRODUCT_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PRODUCT_KEY }}
           GITHUB_ID: ${{secrets.GITHUB_ID}}
-          GITHUB_SECRET: ${{secret.GITHUB_SECRET}}
+          GITHUB_SECRET: ${{secrets.GITHUB_SECRET}}
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
