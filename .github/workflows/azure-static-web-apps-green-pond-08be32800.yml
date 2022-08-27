@@ -11,10 +11,6 @@ on:
 
 jobs:
   build_and_deploy_job:
-    env:
-      NEXT_PUBLIC_STRIPE_PRODUCT_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PRODUCT_KEY }}
-      GITHUB_ID: ${{secrets.GITHUB_ID}}
-      GITHUB_SECRET: ${{secret.GITHUB_SECRET}}
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
@@ -48,7 +44,9 @@ jobs:
         env: # Add environment variables here
           HUGO_VERSION: 0.58.0
           NEXT_AUZRE_ENV: ${{ secrets.NEXT_AUZRE_ENV}}
-
+          NEXT_PUBLIC_STRIPE_PRODUCT_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PRODUCT_KEY }}
+          GITHUB_ID: ${{secrets.GITHUB_ID}}
+          GITHUB_SECRET: ${{secret.GITHUB_SECRET}}
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
