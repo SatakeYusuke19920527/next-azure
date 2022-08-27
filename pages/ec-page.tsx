@@ -1,4 +1,3 @@
-import { loadStripe } from '@stripe/stripe-js';
 import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import ProductCard from '../components/ProductCard';
@@ -7,9 +6,6 @@ import { useAppSelector } from '../hooks/useRTK';
 import { getProducts } from '../lib/get-products';
 import { ProductType } from '../types/ProductType';
 
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
-);
 const EcPage = () => {
   const [pds, setPds] = useState<ProductType[]>([]);
   console.log('🚀 ~ file: ec-page.tsx ~ line 15 ~ EcPage ~ pds', pds);
@@ -17,7 +13,6 @@ const EcPage = () => {
   console.log('🚀 ~ file: ec-page.tsx ~ line 17 ~ EcPage ~ user', user);
   useEffect(() => {
     getStripeProducts();
-    // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
     if (query.get('success')) {
       console.log('Order placed! You will receive an email confirmation.');
